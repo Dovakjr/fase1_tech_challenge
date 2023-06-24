@@ -1,23 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsuariosModule } from './usuarios/usuarios.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { UsuarioModel } from './usuarios/entities/usuario.model';
+import { UserModel } from './users/entities/user.model';
+import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    UsuariosModule,
     SequelizeModule.forRoot({
       dialect: 'sqlite',
       host: ':memory:',
       autoLoadModels: true,
-      models: [UsuarioModel],
+      models: [UserModel],
     }),
+    ProductsModule,
+    OrdersModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
-
-//Model - View - Controller

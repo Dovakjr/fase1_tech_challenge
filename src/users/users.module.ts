@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UsuariosService } from './usuarios.service';
-import { UsuariosController } from './usuarios.controller';
-import { UsuarioModel } from './entities/usuario.model';
+import { UsersService } from './users.service';
+import { UsersController } from './users.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { HttpModule } from '@nestjs/axios';
-import { UserAdapterSequelize } from './gateways/usuario-adapter-sequelize';
+import { UserAdapterSequelize } from './gateways/user-adapter-sequelize';
+import { UserModel } from './entities/user.model';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([UsuarioModel]),
+    SequelizeModule.forFeature([UserModel]),
     HttpModule.register({
       baseURL: 'https://jsonplaceholder.typicode.com/',
     }),
   ],
-  controllers: [UsuariosController],
+  controllers: [UsersController],
   providers: [
-    UsuariosService,
+    UsersService,
     UserAdapterSequelize,
     {
       provide: 'UserPortInterface',
@@ -23,4 +23,4 @@ import { UserAdapterSequelize } from './gateways/usuario-adapter-sequelize';
     },
   ],
 })
-export class UsuariosModule {}
+export class UsersModule {}

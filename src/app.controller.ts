@@ -10,5 +10,3 @@ export class AppController {
     return this.appService.getServerStatus();
   }
 }
-
-//HTTP GET
