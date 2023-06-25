@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities/product.entity';
+import { ProductPortInterface } from './gateways/product-port-interface';
+import { create } from 'domain';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(
+    @Inject('ProductPortInterface')
+    private ProductPort: ProductPortInterface,
+  ) {}
+
+  async create(createProductDto: CreateProductDto) {
+    const product = new Product(
+      createProductDto.id,
+      createProductDto.name,
+      createProductDto.type,
+      createProductDto.price,
+      createProductDto.description,
+      createProductDto.image,
+    );
+    await this.ProductPort.create(product);
+    return product;
   }
 
   findAll() {
-    return `This action returns all products`;
+    const productList = this.ProductPort.findAll();
+    return productList;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findByPk(id: number) {
+    const product = await this.ProductPort.findByPk(id);
+    return product;
+  }
+
+  async findByType(type: string) {
+    const productList = await this.ProductPort.findByType(type);
+    return productList;
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return this.ProductPort.update(id, updateProductDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  delete(id: number) {
+    return this.ProductPort.delete(id);
   }
 }

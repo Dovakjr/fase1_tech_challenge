@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
+import { Order } from './entities/order.entity';
+import { OrderPortInterface } from './gateways/order-port-interface';
+import { UserPortInterface } from '../users/gateways/user-port-interface';
+import { ProductPortInterface } from '../products/gateways/product-port-interface';
+import { OrderProduct } from './entities/order-product.entity';
+import { log } from 'console';
 
 @Injectable()
 export class OrdersService {
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+  constructor(
+    @Inject('OrderPortInterface')
+    private orderPort: OrderPortInterface,
+    @Inject('UserPortInterface')
+    private readonly userPort: UserPortInterface,
+    @Inject('ProductPortInterface')
+    private readonly productPort: ProductPortInterface,
+  ) {}
+
+  async create(createOrderDto: CreateOrderDto) {
+    const { user_id, products } = createOrderDto;
+
+    //Validate User ID
+    const user = await this.userPort.findByPk(user_id);
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    //Create new order
+    const order = new Order('Recebido', user_id);
+
+    //Create products List
+    const orderItems = await Promise.all(
+      products.map(async (product) => {
+        const existingProduct = await this.productPort.findByPk(product.id);
+
+        if (!existingProduct) {
+          throw new NotFoundException(`Produto não encontrado: ${product.id}`);
+        }
+
+        return new OrderProduct(order.id, product.quantity, existingProduct.id);
+      }),
+    );
+
+    await this.orderPort.create(order, orderItems);
+    return order;
   }
 
   findAll() {
-    return `This action returns all orders`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
-  }
-
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+    const orderList = this.orderPort.findAll();
+    return orderList;
   }
 }

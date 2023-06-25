@@ -6,6 +6,9 @@ import { UserModel } from './users/entities/user.model';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { UsersModule } from './users/users.module';
+import { OrderModel } from './orders/entities/order.model';
+import { ProductModel } from './products/entities/product.model';
+import { OrderProductModel } from './orders/entities/order-product.model';
 
 @Module({
   imports: [
@@ -13,7 +16,7 @@ import { UsersModule } from './users/users.module';
       dialect: 'sqlite',
       host: ':memory:',
       autoLoadModels: true,
-      models: [UserModel],
+      models: [UserModel, OrderModel, ProductModel, OrderProductModel],
     }),
     ProductsModule,
     OrdersModule,

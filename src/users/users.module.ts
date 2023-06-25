@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { HttpModule } from '@nestjs/axios';
-import { UserAdapterSequelize } from './gateways/user-adapter-sequelize';
+import { UserAdapterSequelize } from '../users/gateways/user-adapter-sequelize';
 import { UserModel } from './entities/user.model';
 
 @Module({

@@ -23,10 +23,10 @@ export class UserAdapterSequelize implements UserPortInterface {
   async findAll(): Promise<User[]> {
     const usersModels = await this.userModel.findAll();
     return usersModels.map(
-      (usuarioModel) =>
-        new User(usuarioModel.cpf, usuarioModel.name, usuarioModel.email),
+      (userModel) => new User(userModel.cpf, userModel.name, userModel.email),
     );
   }
+
   async findByPk(cpf: string): Promise<User> {
     const userModel = await this.userModel.findByPk(cpf);
     if (!userModel) {
