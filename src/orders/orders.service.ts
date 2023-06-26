@@ -5,7 +5,6 @@ import { OrderPortInterface } from './gateways/order-port-interface';
 import { UserPortInterface } from '../users/gateways/user-port-interface';
 import { ProductPortInterface } from '../products/gateways/product-port-interface';
 import { OrderProduct } from './entities/order-product.entity';
-import { log } from 'console';
 
 @Injectable()
 export class OrdersService {

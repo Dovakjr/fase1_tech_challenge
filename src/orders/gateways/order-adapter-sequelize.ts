@@ -3,9 +3,6 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { OrderModel } from '../entities/order.model';
 import { Order } from '../entities/order.entity';
-import { OrderProductModel } from '../entities/order-product.model';
-import { Product } from 'src/products/entities/product.entity';
-import { ProductModel } from 'src/products/entities/product.model';
 
 @Injectable()
 export class OrderAdapterSequelize implements OrderPortInterface {
