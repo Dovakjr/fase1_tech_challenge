@@ -1,9 +1,4 @@
-import {
-  BelongsTo,
-  BelongsToMany,
-  ForeignKey,
-  Model,
-} from 'sequelize-typescript';
+import { BelongsToMany, ForeignKey, Model } from 'sequelize-typescript';
 import { Column, Table, DataType } from 'sequelize-typescript';
 import { ProductModel } from 'src/products/entities/product.model';
 import { UserModel } from 'src/users/entities/user.model';
@@ -15,7 +10,7 @@ export type ListAttributes = {
   user_id: string;
 };
 
-@Table
+@Table({ tableName: 'orders' })
 export class OrderModel extends Model<ListAttributes> {
   @Column({
     type: DataType.INTEGER,
@@ -31,9 +26,6 @@ export class OrderModel extends Model<ListAttributes> {
   @ForeignKey(() => UserModel)
   @Column
   user_id: string;
-
-  @BelongsTo(() => UserModel)
-  user: UserModel;
 
   @BelongsToMany(() => ProductModel, () => OrderProductModel)
   products: ProductModel[];

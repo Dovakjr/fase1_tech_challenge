@@ -8,9 +8,17 @@ import { UserModel } from 'src/users/entities/user.model';
 import { ProductModel } from 'src/products/entities/product.model';
 import { UserAdapterSequelize } from 'src/users/gateways/user-adapter-sequelize';
 import { ProductAdapterSequelize } from 'src/products/gateways/product-adapter-sequelize';
+import { OrderProductModel } from './entities/order-product.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([OrderModel, UserModel, ProductModel])],
+  imports: [
+    SequelizeModule.forFeature([
+      OrderModel,
+      UserModel,
+      ProductModel,
+      OrderProductModel,
+    ]),
+  ],
   controllers: [OrdersController],
   providers: [
     OrdersService,

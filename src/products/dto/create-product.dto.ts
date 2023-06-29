@@ -1,5 +1,5 @@
 export class CreateProductDto {
-  id: null;
+  id: number;
   name: string;
   type: string; //Categoria {Lanhce, Acompanhamento, Bebida, Sobremesa}
   price: number;

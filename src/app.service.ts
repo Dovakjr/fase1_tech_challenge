@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getServerStatus(): string {
-    return 'Server Running';
+    const env = String(process.env.NODE_ENV);
+    return `Server Running in ${env}`;
   }
 }

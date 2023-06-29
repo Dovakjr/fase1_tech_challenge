@@ -12,7 +12,7 @@ export type ListAttributes = {
   image: string; //Blob storage
 };
 
-@Table
+@Table({ tableName: 'products' })
 export class ProductModel extends Model<ListAttributes> {
   @Column({
     type: DataType.INTEGER,
@@ -31,5 +31,5 @@ export class ProductModel extends Model<ListAttributes> {
   @Column
   image: string;
   @BelongsToMany(() => OrderModel, () => OrderProductModel)
-  orders: OrderModel;
+  orders: OrderModel[];
 }

@@ -20,23 +20,19 @@ export class ProductsService {
       createProductDto.description,
       createProductDto.image,
     );
-    await this.ProductPort.create(product);
-    return product;
+    return await this.ProductPort.create(product);
   }
 
   findAll() {
-    const productList = this.ProductPort.findAll();
-    return productList;
+    return this.ProductPort.findAll();
   }
 
   async findByPk(id: number) {
-    const product = await this.ProductPort.findByPk(id);
-    return product;
+    return await this.ProductPort.findByPk(id);
   }
 
   async findByType(type: string) {
-    const productList = await this.ProductPort.findByType(type);
-    return productList;
+    return await this.ProductPort.findByType(type);
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

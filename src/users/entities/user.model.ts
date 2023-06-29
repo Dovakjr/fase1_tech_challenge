@@ -8,11 +8,10 @@ export type ListAttributes = {
   email: string;
 };
 
-@Table
+@Table({ tableName: 'users' })
 export class UserModel extends Model<ListAttributes> {
   @Column({
     type: DataType.INTEGER,
-    autoIncrement: true,
   })
   id: number;
 

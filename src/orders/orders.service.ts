@@ -32,10 +32,14 @@ export class OrdersService {
     //Create products List
     const orderItems = await Promise.all(
       products.map(async (product) => {
-        const existingProduct = await this.productPort.findByPk(product.id);
+        const existingProduct = await this.productPort.findByPk(
+          product.product_id,
+        );
 
         if (!existingProduct) {
-          throw new NotFoundException(`Produto não encontrado: ${product.id}`);
+          throw new NotFoundException(
+            `Produto não encontrado: ${product.product_id}`,
+          );
         }
 
         return new OrderProduct(order.id, product.quantity, existingProduct.id);
@@ -47,7 +51,14 @@ export class OrdersService {
   }
 
   findAll() {
-    const orderList = this.orderPort.findAll();
-    return orderList;
+    return this.orderPort.findAll();
+  }
+
+  findAllWhitProducts() {
+    return this.orderPort.findAllWithProducts();
+  }
+
+  async findByPk(id: number) {
+    return await this.orderPort.findByPk(id);
   }
 }
