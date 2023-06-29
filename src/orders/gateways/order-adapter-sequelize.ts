@@ -18,10 +18,22 @@ export class OrderAdapterSequelize implements OrderPortInterface {
     private productModel: typeof ProductModel,
   ) {}
 
-  async create(order: Order): Promise<Order> {
+  async create(
+    order: Order,
+    orderProducts: OrderProductModel[],
+  ): Promise<Order> {
     const newOrder = await this.orderModel.create(order);
     order.status = newOrder.status;
     order.user_id = newOrder.user_id;
+    order.id = newOrder.id;
+
+    //Cadastra itens na tabela pivô
+    orderProducts.map(async (orderProduct) => {
+      orderProduct.order_id = order.id;
+      console.log(orderProduct);
+      await this.orderProductModel.create(orderProduct);
+    });
+
     return order;
   }
 
