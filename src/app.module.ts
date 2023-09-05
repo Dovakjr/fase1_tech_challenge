@@ -1,19 +1,20 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsModule } from './products/products.module';
-import { OrdersModule } from './orders/orders.module';
-import { UsersModule } from './users/users.module';
+import { ProductsModule } from './presentations/product/products.module';
+import { OrdersModule } from './presentations/order/orders.module';
+import { UsersModule } from './presentations/user/users.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { sequelizeConfig } from './config/db.config';
+import { sequelizeConfig } from './infrastructure/config/db.config';
 
 @Module({
   imports: [
     SequelizeModule.forRoot(sequelizeConfig),
+    UsersModule,
     ProductsModule,
     OrdersModule,
-    UsersModule,
   ],
+
   controllers: [AppController],
   providers: [AppService],
 })
