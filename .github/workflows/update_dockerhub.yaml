@@ -3,7 +3,7 @@ name: Cria uma nova Build e atualiza a imagem docker no DockerHub.com
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-push:
