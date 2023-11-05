@@ -22,15 +22,8 @@ jobs:
       - name: Build Docker Image
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t dovakjr/fase1techchallenge:latest -f Dockerfile .
-
-      - name: Tag    
-        run: |
-          docker tag dovakjr/fase1techchallenge:latest fase1techchallenge:latest
-      
-      - name: Push Docker Image
-        run: |
-          docker --push fase1techchallenge:latest
+          docker buildx build --platform linux/amd64,linux/arm64 -t dovakjr/fase1techchallenge:latest .
+          docker --push dovakjr/fase1techchallenge:latest
 
       - name: Logout from Docker Hub
         run: docker logout
