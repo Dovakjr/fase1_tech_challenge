@@ -22,7 +22,7 @@ jobs:
       - name: Build Docker Image
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t dovakjr/fase1techchallenge:latest .
+          docker buildx build --pull --rm -f "Dockerfile" -t dovakjr/fase1techchallenge:latest "."
           docker images
           docker push dovakjr/fase1techchallenge:latest
 
