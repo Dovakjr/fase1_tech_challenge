@@ -171,6 +171,7 @@ export class UsecaseProxyModule {
         UsecaseProxyModule.FIND_ALL_ORDER_USE_CASE,
         UsecaseProxyModule.FIND_ALL_ORDER_WITH_PRODUCTS_USE_CASE,
         UsecaseProxyModule.GET_ORDER_PAYMENT_STATUS_USE_CASE,
+        UsecaseProxyModule.UPDATE_ORDER_USE_CASE,
       ],
     };
   }

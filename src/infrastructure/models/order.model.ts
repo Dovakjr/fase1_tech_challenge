@@ -23,9 +23,6 @@ export class OrderModel extends Model<ListAttributes> {
   @Column
   status: string;
 
-  @Column
-  payment_status: string;
-
   //Table relations
   @ForeignKey(() => UserModel)
   @Column

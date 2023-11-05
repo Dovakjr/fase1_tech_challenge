@@ -31,7 +31,7 @@ export class OrdersController {
     private readonly findAllOrdersWithProductsUseCaseProxy: UseCaseProxy<FindAllOrdersWithProductsUseCase>,
     @Inject(UsecaseProxyModule.GET_ORDER_PAYMENT_STATUS_USE_CASE)
     private readonly getOrderPaymentStatusUseCaseProxy: UseCaseProxy<GetOrderPaymentStatus>,
-    @Inject(UsecaseProxyModule.FIND_ALL_ORDER_WITH_PRODUCTS_USE_CASE)
+    @Inject(UsecaseProxyModule.UPDATE_ORDER_USE_CASE)
     private readonly updateOrderUseCaseProxy: UseCaseProxy<UpdateOrderUseCase>,
   ) {}
 

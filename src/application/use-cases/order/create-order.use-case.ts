@@ -20,11 +20,7 @@ export class CreateOrderUseCase {
     }
 
     //Create new order
-    const order = new Order(
-      'Recebido',
-      data.user_id,
-      'Aguardado aprovação de pagamento',
-    );
+    const order = new Order('Recebido', data.user_id);
 
     //Create products List
     const orderItems = await Promise.all(

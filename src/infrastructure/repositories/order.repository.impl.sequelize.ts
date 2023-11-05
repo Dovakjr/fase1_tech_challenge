@@ -58,11 +58,7 @@ export class OrderRepositorySequelize implements IOrderRepository {
     });
 
     ordersModels.map(async (orderModel) => {
-      const order = new Order(
-        orderModel.status,
-        orderModel.user_id,
-        orderModel.payment_status,
-      );
+      const order = new Order(orderModel.status, orderModel.user_id);
       return order;
     });
 
@@ -93,7 +89,7 @@ export class OrderRepositorySequelize implements IOrderRepository {
 
     order.products = products;
 
-    return new Order(order.status, order.user_id, order.payment_status);
+    return new Order(order.status, order.user_id);
   }
 
   async findAllWithProducts() {
