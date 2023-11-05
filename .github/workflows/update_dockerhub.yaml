@@ -26,6 +26,7 @@ jobs:
           docker tag dovakjr/fase1techchallenge:latest dovakjr/fase1techchallenge:latest
       
       - name: Push Docker Image
+        run: |
           docker push dovakjr/fase1techchallenge:latest
 
       - name: Logout from Docker Hub
