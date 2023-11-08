@@ -43,7 +43,7 @@ jobs:
         with:
           context: "{{defaultContext}}"
           push: true
-          tags: "latest"
+          tags: "dovakjr/fase1techchallenge:latest"
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Logout from Docker Hub
